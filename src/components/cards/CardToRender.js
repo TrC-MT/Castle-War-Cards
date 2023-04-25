@@ -1,5 +1,5 @@
-import cards from '../cards/cards';
-import '../styles/ComponentStyles/cardStyles.css';
+import cards from './cards';
+import '../../styles/ComponentStyles/cardStyles.css';
 
 export default function Card({nums}){
     let typeNum = nums.typeNum;
@@ -29,6 +29,7 @@ export default function Card({nums}){
             <div class={`card-container ${type}`}>
                 <h3 class="card-heading">{card.name}</h3>
                 <span class="card-cost">Cost: {card.cost} {currency}</span>
+                <hr/>
                 <p class="card-effect">{card.effect}</p>
             </div>
         </>

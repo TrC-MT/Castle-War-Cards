@@ -1,24 +1,12 @@
 
 .card-container{
+    width: 20%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    width: 14%;
     align-items: center;
     border: 2px solid lightslategray;
 }
 
-.build{
-    /* background-color: var(--brown); */
-    background-color: brown;
-}
-.attack{
-    /* background-color: var(--light_green); */
-    background-color: lightgreen;
 
-}
-.magic{
-    /* background-color: var(--light_purple); */
-    background-color: rgb(173, 2, 173);
-
-}
 

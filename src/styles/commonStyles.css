@@ -3,3 +3,22 @@
     --light_green: lightgreen;
     --light_purple: rgb(173, 2, 173);
 }
+
+.build{
+    /* background-color: var(--brown); */
+    background-color: var(--brown);
+}
+.attack{
+    /* background-color: var(--light_green); */
+    background-color: var(--light_green);
+
+}
+.magic{
+    /* background-color: var(--light_purple); */
+    background-color: var(--light_purple);
+
+}
+
+hr{
+    width: 50%;
+}
