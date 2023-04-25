@@ -1,5 +1,4 @@
 import '../styles/pageStyles/gamepageStyles.css'
-import Card from "../components/cards/CardToRender";
 import ResourceStats from "../components/stats/resources";
 import Deck from '../components/cards/deck';
 
@@ -112,11 +111,31 @@ export default function GamePage(){
         turnEnd(whichCard.nums)
     }
     //--------
-    function turnEnd(){
-        //pull that card from the deck
+    function turnEnd(nums){
+        //replace that card in the deck
+        if(player_turn == 'one'){
+            for(let i = 0; i < 5; i++){
+                if(players.one.cards[i][0] == nums.typeNum && players.one.cards[i][1] == nums.num){
+                    players.one.cards[i][0] = randnum(4);
+                    players.one.cards[i][1] = randnum(10)
+                    break;
+                }
+            }
+        }
+        if(player_turn == 'two'){
+            for(let i = 0; i < 5; i++){
+                if(players.two.cards[i][0] == nums.typeNum && players.two.cards[i][1] == nums.num){
+                    players.two.cards[i][0] = randnum(4);
+                    players.two.cards[i][1] = randnum(10)
+                    break;
+                }
+            }
+        }
+        else{
+            console.log('player_count not working')
+        }
 
-        //get a new card
-
+        //check to see if either player is out
         if(players.one.constructs.castle == 0){
             console.log('Player two wins')
         } 
@@ -124,7 +143,7 @@ export default function GamePage(){
             console.log('Player one wins')   
         }
         else{
-            //turn()
+            //turnStart()
         }
     }
 
