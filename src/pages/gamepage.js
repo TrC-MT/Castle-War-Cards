@@ -1,6 +1,7 @@
 import '../styles/pageStyles/gamepageStyles.css'
 import Card from "../components/cards/CardToRender";
 import ResourceStats from "../components/stats/resources";
+import Deck from '../components/cards/deck';
 
 
 export default function GamePage(){
@@ -22,6 +23,13 @@ export default function GamePage(){
                     currency: 4
                 },
             },
+            cards: [
+                [1, 2], //card 1: {type: 0-3, num: 0-9}
+                [2, 1],
+                [1, 9],
+                [1, 5],
+                [2, 1]
+            ],
             constructs: {
                 castle: 40,
                 fence: 20,
@@ -43,12 +51,86 @@ export default function GamePage(){
                     currency: 2
                 },
             },
+            cards: [
+                [1, 2],
+                [2, 1],
+                [0, 4],
+                [1, 5],
+                [2, 1]
+            ],
             constructs: {
                 castle: 40,
                 fence: 20,
             }
         }
     }
+    //------------------------------
+    let turn_count = 0;
+    let player_turn = 'one';
+    let clickable = false;
+    function turnStart(){
+        //determine which player is going
+        turn_count += 1;
+        if(turn_count %2 == 0){
+            player_turn = 'two';
+        }
+        else{
+            player_turn = 'one';
+        }
+
+        // show correct player cards
+            //the Deck component automatically does that
+
+        //update player resources
+        if(player_turn == 'one'){
+            players.one.resources.build.currency += players.one.resources.build.helpers
+            players.one.resources.attack.currency += players.one.resources.attack.helpers
+            players.one.resources.magic.currency += players.one.resources.magic.helpers
+
+        }
+        else if(player_turn == 'two'){
+            players.two.resources.build.currency += players.two.resources.build.helpers
+            players.two.resources.attack.currency += players.two.resources.attack.helpers
+            players.two.resources.magic.currency += players.two.resources.magic.helpers
+        }
+        else{
+            console.log('player_turn malfunction')
+        }
+        
+        // let player pick a card
+        clickable = true
+    }
+    //---------
+    function playCard(whichCard){
+        clickable = false //stop players from playing another card
+        let effect = whichCard.effect;
+
+        //update players resources //make sure none of them are below 1
+
+        //render the structures
+
+        turnEnd(whichCard.nums)
+    }
+    //--------
+    function turnEnd(){
+        //pull that card from the deck
+
+        //get a new card
+
+        if(players.one.constructs.castle == 0){
+            console.log('Player two wins')
+        } 
+        else if(players.two.constructs.castle == 0){
+            console.log('Player one wins')   
+        }
+        else{
+            //turn()
+        }
+    }
+
+    
+
+    //---------------------------
 
     function randnum(max){
         let num = Math.floor(Math.random() * (max -1));
@@ -69,11 +151,7 @@ export default function GamePage(){
                         <p>Lorem ipsum dolor sit amet.</p>
                     </div>
                     <div id="deck">
-                        <Card nums={{typeNum: randnum(4), Num: randnum(10)}}/>
-                        <Card nums={{typeNum: randnum(4), Num: randnum(10)}}/>
-                        <Card nums={{typeNum: randnum(4), Num: randnum(10)}}/>
-                        <Card nums={{typeNum: randnum(4), Num: randnum(10)}}/>
-                        <Card nums={{typeNum: randnum(4), Num: randnum(10)}}/>
+                        <Deck render={{turn: player_turn, cards: {oneCards: players.one.cards, twoCards: players.two.cards}, clickable: clickable, pc: playCard}}></Deck>
                     </div>
                 </div>
                 <div id="right-player-container" class="player-container">
@@ -86,45 +164,5 @@ export default function GamePage(){
         </>
     )
 
-    //------------------------------
-    let turn_count = 0;
-    let player_turn = 'one';
-    function turn(){
-        turn_count += 1;
-        if(turn_count %2 == 0){
-            player_turn = 'two';
-        }
-        else{
-            player_turn = 'one';
-        }
-
-        //update player resources
-        if(player_turn == 'one'){
-            players.one.resources.build.currency += players.one.resources.build.helpers
-            players.one.resources.attack.currency += players.one.resources.attack.helpers
-            players.one.resources.magic.currency += players.one.resources.magic.helpers
-
-        }
-        else if(player_turn == 'two'){
-            players.two.resources.build.currency += players.two.resources.build.helpers
-            players.two.resources.attack.currency += players.two.resources.attack.helpers
-            players.two.resources.magic.currency += players.two.resources.magic.helpers
-        }
-        else{
-            console.log('player_turn malfunction')
-        }
-        // show correct player cards
-        
-        // let player pick a card
-
-        //play the card, get a new one
-
-        //update players resources //make sure none of them are below 1
-
-        // if neither player is out, then recall turn()
-    }
-
     
-
-    //---------------------------
 }

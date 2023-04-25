@@ -1,11 +1,13 @@
 import cards from './cards';
 import '../../styles/ComponentStyles/cardStyles.css';
 
-export default function Card({nums}){
-    let typeNum = nums.typeNum;
-    let num = nums.Num;
+export default function Card({render}){
+    let clickable = render.clickable;
+    let typeNum = render.nums.typeNum;
+    let num = render.nums.Num;
     var type = '';
     var currency = '';
+    let playCard = render.pc;
     if(typeNum == 0){
         type = 'build';
         currency = 'bricks';
@@ -23,10 +25,11 @@ export default function Card({nums}){
     }
 
     let card = cards[typeNum][num]
+    let whichCard = {effect: card.effect, nums: render.nums}
 
     return(
         <>
-            <div class={`card-container ${type}`}>
+            <div class={`card-container ${type}`} onClick={tryPlayCard(whichCard)}>
                 <h3 class="card-heading">{card.name}</h3>
                 <span class="card-cost">Cost: {card.cost} {currency}</span>
                 <hr/>
@@ -34,4 +37,13 @@ export default function Card({nums}){
             </div>
         </>
     )
+
+    function tryPlayCard(whichCard){
+        if(clickable == true){
+            playCard(whichCard)
+        }
+        else{
+            console.log('Not clickable yet.')
+        }
+    }
 }
