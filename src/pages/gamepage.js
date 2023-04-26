@@ -99,6 +99,9 @@ export default function GamePage(){
         else{
             console.log('player_turn malfunction')
         }
+
+        // show correct player resources
+            //the Resources components should automatically do that
         
         // let player pick a card
         clickable = true
@@ -186,7 +189,7 @@ export default function GamePage(){
 
 
     //Start the game
-    turnStart()
+    // turnStart()
 
 
     return(
