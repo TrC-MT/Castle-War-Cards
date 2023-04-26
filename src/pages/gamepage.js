@@ -1,7 +1,7 @@
 import '../styles/pageStyles/gamepageStyles.css'
 import ResourceStats from "../components/stats/resources";
 import Deck from '../components/cards/deck';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 
 
 export default function GamePage(){
@@ -66,17 +66,21 @@ export default function GamePage(){
     }
     //------------------------------
     let turn_count = 0;
-    let player_turn = 'one';
+    let [player_turn, setPlayerTurn] = useState('one')
     let clickable = false;
     function turnStart(){
         console.log('before replace player one cards: ', players.one.cards)
         //determine which player is going
         turn_count += 1;
         if(turn_count %2 == 0){
-            player_turn = 'two';
+            useCallback(() => {
+                setPlayerTurn('two')
+            }, [player_turn])
         }
         else{
-            player_turn = 'one';
+            useCallback(() => {
+                setPlayerTurn('one')
+            }, [player_turn])
         }
 
         console.log('\n \n turn_count: ', turn_count, " player_turn: ", player_turn)
@@ -220,3 +224,28 @@ export default function GamePage(){
 
     
 }
+
+
+//============================
+/* Gameflow */
+/*
+    SETUP
+    randomly pick the players starting cards
+    start the turn with player one
+    render the page with the default starting resources
+    and render generated cards for player one
+    
+    GAMEPLAY
+    player picks a card
+    the cards effect is used
+    update the players resources according to the effect
+    render the players resources
+    remove that card from the players deck
+    replace the played card with a random one
+    set the players_turn to the next player
+    render that players cards    
+
+
+
+
+*/
