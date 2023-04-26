@@ -33,7 +33,7 @@ export default function Card({render}){
                 <h3 class="card-heading">{card.name}</h3>
                 <span class="card-cost">Cost: {card.cost} {currency}</span>
                 <hr/>
-                <p class="card-effect">{card.effect}</p>
+                <p class="card-effect">{card.description}</p>
             </div>
         </>
     )

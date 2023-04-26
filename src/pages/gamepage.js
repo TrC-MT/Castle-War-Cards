@@ -105,6 +105,7 @@ export default function GamePage(){
         let effect = whichCard.effect;
 
         //update players resources //make sure none of them are below 1
+        ///The effect will be used here
 
         //render the structures
 
@@ -161,7 +162,7 @@ export default function GamePage(){
         <>
             <div id="gamepage-container">
                 <div id="left-player-container" class="player-container">
-                    <ResourceStats render={{type: {helper: {name: 'Build', amount: players.one.resources.build.helpers}, currency: {name: 'Bricks', amount: players.one.resources.build.currency}},  class: "build"}}></ResourceStats>
+                    <ResourceStats render={{type: {helper: {name: 'Builders', amount: players.one.resources.build.helpers}, currency: {name: 'Bricks', amount: players.one.resources.build.currency}},  class: "build"}}></ResourceStats>
                     <ResourceStats render={{type: {helper: {name: 'Soldiers', amount: players.one.resources.attack.helpers}, currency: {name: 'Weapons', amount: players.one.resources.attack.currency}}, class: "attack"}}></ResourceStats>
                     <ResourceStats render={{type: {helper: {name: 'Magicians', amount: players.one.resources.magic.helpers}, currency: {name: 'Crystals', amount: players.one.resources.magic.currency}}, class: "magic"}}></ResourceStats>
                 </div>
@@ -174,7 +175,7 @@ export default function GamePage(){
                     </div>
                 </div>
                 <div id="right-player-container" class="player-container">
-                <ResourceStats render={{type: {helper: {name: 'Build', amount: players.two.resources.build.helpers}, currency: {name: 'Bricks', amount: players.two.resources.build.currency}},  class: "build"}}></ResourceStats>
+                <ResourceStats render={{type: {helper: {name: 'Builders', amount: players.two.resources.build.helpers}, currency: {name: 'Bricks', amount: players.two.resources.build.currency}},  class: "build"}}></ResourceStats>
                 <ResourceStats render={{type: {helper: {name: 'Soldiers', amount: players.two.resources.attack.helpers}, currency: {name: 'Weapons', amount: players.two.resources.attack.currency}}, class: "attack"}}></ResourceStats>
                 <ResourceStats render={{type: {helper: {name: 'Magicians', amount: players.two.resources.magic.helpers}, currency: {name: 'Crystals', amount: players.two.resources.magic.currency}}, class: "magic"}}></ResourceStats>
                 </div>

@@ -3,104 +3,124 @@ export default [
         {
             name: "Babylon",
             cost: "39",
-            effect: "castle +32"
+            description: "castle +32",
+            effect: ""
         },
         {
             name: "Wain",
             cost: "10",
-            effect: "enemy castle -4, castle +8"
+            description: "opponent castle -4, castle +8",
+            effect: ""
         },
         {
             name: "Base",
             cost: "1",
-            effect: "castle +2"
+            description: "castle +2",
+            effect: ""
         },
         {
             name: "Defence",
             cost: "3",
-            effect: "fence +6"
+            description: "fence +6",
+            effect: ""
         },
         {
             name: "Fence",
             cost: "12",
-            effect: "fence +22"
+            description: "fence +22",
+            effect: ""
         },
         {
             name: "Fort",
             cost: "18",
-            effect: "castle +20"
+            description: "castle +20",
+            effect: ""
         },
         {
             name: "Reserve",
             cost: "3",
-            effect: "caste +8, fence -4"
+            description: "castle +8, fence -4",
+            effect: ""
         },
         {
             name: "School",
             cost: "8",
-            effect: "builders +1"
+            description: "builders +1",
+            effect: ""
         },
         {
             name: "Tower",
             cost: "5",
-            effect: "castle +5"
+            description: "castle +5",
+            effect: ""
         },
         {
             name: "Wall",
             cost: "1",
-            effect: "fence +3"
+            description: "fence +3",
+            effect: ""
         },
     ],
     [ // attack:
         {
             name: "Archer",
             cost: "1",
-            effect: "attack 2"
+            description: "attack 2",
+            effect: ""
         },
         {
             name: "Catapult", //Known in the game as Attack
             cost: "10",
-            effect: "attack 12"
+            description: "attack 12",
+            effect: ""
         },
         {
             name: "Banshee",
             cost: "28",
-            effect: "attack 32"
+            description: "attack 32",
+            effect: ""
         },
         {
             name: "Knight",
             cost: "2",
-            effect: "attack 3"
+            description: "attack 3",
+            effect: ""
         },
         {
             name: "Platoon",
             cost: "4",
-            effect: "attack 6"
+            description: "attack 6",
+            effect: ""
         },
         {
             name: "Recruit",
             cost: "8",
-            effect: "soldiers +1"
+            description: "soldiers +1",
+            effect: ""
         },
         {
             name: "Rider",
             cost: "2",
-            effect: "attack 4"
+            description: "attack 4",
+            effect: ""
         },
         {
             name: "Saboteur",
             cost: "12",
-            effect: "enemy_stocks -4"
+            description: "opponent stocks -4",
+            effect: ""
         },
         {
             name: "Swat",
             cost: "18",
-            effect: "enemy_castle -10"
+            description: "opponent castle -10",
+            effect: ""
         },
         {
             name: "Thief",
             cost: "15",
-            effect: "enemy_stocks -5 stocks +5"
+            description: "opponent stocks -5, stocks +5",
+            effect: ""
         },
         
     ],
@@ -108,52 +128,62 @@ export default [
         {
             name: "Conjure bricks",
             cost: "4",
-            effect: "bricks +8"
+            description: "bricks +8",
+            effect: ""
         },
         {
             name: "Conjure crystals",
             cost: "4",
-            effect: "crystals +8"
+            description: "crystals +8",
+            effect: ""
         },
         {
             name: "Conjure weapons",
             cost: "4",
-            effect: "weapons +8"
+            description: "weapons +8",
+            effect: ""
         },
         {
             name: "Crush bricks",
             cost: "4",
-            effect: "enemy bricks -8"
+            description: "opponent bricks -8",
+            effect: ""
         },
         {
             name: "Crush crystals",
             cost: "4",
-            effect: "enemy crystals -8"
+            description: "opponent crystals -8",
+            effect: ""
         },
         {
             name: "Crush weapons",
             cost: "4",
-            effect: "enemy weapons -8"
+            description: "opponent weapons -8",
+            effect: ""
         },
         {
             name: "Curse",
             cost: "25",
-            effect: "all +1, enemy all -1"
+            description: "all +1, opponent all -1",
+            effect: ""
         },
         {
             name: "Dragon",
             cost: "21",
-            effect: "attack 25"
+            description: "attack 25",
+            effect: ""
         },
         {
             name: "Pixies",
             cost: "22",
-            effect: "castle +22"
+            description: "castle +22",
+            effect: ""
         },
         {
             name: "Sorcerer",
             cost: "8",
-            effect: "magic +1"
+            description: "magicians +1",
+            effect: ""
         },
     ]
 ]
