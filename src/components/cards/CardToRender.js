@@ -29,17 +29,18 @@ export default function Card({render}){
 
     return(
         <>
-            <div class={`card-container ${type}`} onClick={tryPlayCard(whichCard)}>
-                <h3 class="card-heading">{card.name}</h3>
-                <span class="card-cost">Cost: {card.cost} {currency}</span>
+            <div className={`card-container ${type}`} onClick={(e) => tryPlayCard(whichCard)}>
+                <h3 className="card-heading">{card.name}</h3>
+                <span className="card-cost">Cost: {card.cost} {currency}</span>
                 <hr/>
-                <p class="card-effect">{card.description}</p>
+                <p className="card-effect">{card.description}</p>
             </div>
         </>
     )
 
     function tryPlayCard(whichCard){
         if(clickable == true){
+            console.log('Playing a card.', " whichCard: ", whichCard)
             playCard(whichCard)
         }
         else{

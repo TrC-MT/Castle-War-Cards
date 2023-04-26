@@ -6,6 +6,7 @@ export default function Deck({render}){
     var clickable = render.clickable
 
     if(render.turn == 'one'){
+        console.log('Deck rendering player one cards')
         return(
             <>
                 <Card render={{clickable: clickable, pc: render.pc, nums: {typeNum: oneCards[0][0], Num: oneCards[0][1]}}}/>
@@ -17,6 +18,7 @@ export default function Deck({render}){
         )
     }
     else if(render.turn == 'two'){
+        console.log('Deck rendering player two cards')
         return(
             <>
                 <Card render={{clickable: clickable, pc: render.pc, nums: {typeNum: twoCards[0][0], Num: twoCards[0][1]}}}/>
