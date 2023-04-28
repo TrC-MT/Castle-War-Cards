@@ -1,16 +1,18 @@
 .player-container{
     width: 30%;
-    border: 1px solid red;
+    height: 90%;
 }
 
 .player-resources-container{
     width: 100%;
+    height: 80%;
+    border: 1px solid green;
 }
 
 .deck{
-    width: 100%;
-    display: grid;
-    grid-template-rows: 1fr, 1fr;
-    grid-template-columns: 1fr, 1fr, 1fr;
+    margin-top: 5%;
+    width: 320%;
+    height: 25%;
+    display: flex;
     border: 1px solid blue;
 }

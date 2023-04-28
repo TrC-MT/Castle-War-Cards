@@ -4,6 +4,10 @@
     --light_purple: rgb(173, 2, 173);
 }
 
+*{
+    font-size: 1vw;
+}
+
 .build{
     /* background-color: var(--brown); */
     background-color: var(--brown);

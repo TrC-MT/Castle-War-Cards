@@ -1,5 +1,17 @@
+*{
+ font-size: .8vw;
+}
+
 .resource-stats-container{
     width: 80%;
     height: 30%;
     text-align: center;
+}
+
+.resource-helper{
+    margin-bottom: 0px;
+}
+
+.resource-stat{
+    margin-top: 2%;
 }
