@@ -1,4 +1,8 @@
-one: {
+import ResourceStats from '../stats/resources';
+import Deck from '../cards/deck'
+
+
+let one = {
     name: 'Uno',
     resources: {
         build: {
@@ -25,6 +29,16 @@ one: {
         castle: 40,
         fence: 20,
     }
-},
+}
 
-// return    resources and deck
+export default function PlayerOne(){
+
+    return(
+        <>
+            <ResourceStats render={{type: {helper: {name: 'Builders', amount: one.resources.build.helpers}, currency: {name: 'Bricks', amount: one.resources.build.currency}},  class: "build"}}></ResourceStats>
+            <ResourceStats render={{type: {helper: {name: 'Soldiers', amount: one.resources.attack.helpers}, currency: {name: 'Weapons', amount: one.resources.attack.currency}}, class: "attack"}}></ResourceStats>
+            <ResourceStats render={{type: {helper: {name: 'Magicians', amount: one.resources.magic.helpers}, currency: {name: 'Crystals', amount: one.resources.magic.currency}}, class: "magic"}}></ResourceStats>
+            <Deck render={{cards: {oneCards: one.cards}}}></Deck>
+        </>
+    )
+}

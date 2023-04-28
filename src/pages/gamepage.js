@@ -1,12 +1,199 @@
 import '../styles/pageStyles/gamepageStyles.css'
-import ResourceStats from "../components/stats/resources";
-import Deck from '../components/cards/deck';
 import {useCallback, useState} from 'react';
+import PlayerOne from '../components/players/playerOne'
+import PlayerTwo from '../components/players/playerTwo';
 
 
 export default function GamePage(){
 
-    let players = {
+    
+    //------------------------------
+    let turn_count = 0;
+    let [player_turn_one, setPlayerTurnOne] = useState(true)
+    let [player_turn_two, setPlayerTurnTwo] = useState(false)
+    let clickable = false;
+    function turnStart(){
+        console.log('before replace player one cards: ', )
+        //determine which player is going
+        turn_count += 1;
+        if(turn_count %2 == 0){
+                setPlayerTurnOne(false)
+                setPlayerTurnTwo(true)
+        }
+        else{
+                setPlayerTurnOne(true)
+                setPlayerTurnTwo(false)
+        }
+
+        console.log('\n \n turn_count: ', turn_count, " player_turn: ")
+
+        // show correct player cards
+            //the Deck component should automatically do that
+
+        //update player resources
+        if(player_turn_one == true){
+            PlayerOne.resources.build.currency += PlayerOne.resources.build.helpers
+            PlayerOne.resources.attack.currency += PlayerOne.resources.attack.helpers
+            PlayerOne.resources.magic.currency += PlayerOne.resources.magic.helpers
+
+        }
+        else if(player_turn_two == true){
+            PlayerTwo.resources.build.currency += PlayerTwo.resources.build.helpers
+            PlayerTwo.resources.attack.currency += PlayerTwo.resources.attack.helpers
+            PlayerTwo.resources.magic.currency += PlayerTwo.resources.magic.helpers
+        }
+        else{
+            console.log('player_turn malfunction')
+        }
+
+        // show correct player resources
+            //the Resources components should automatically do that
+        
+        // let player pick a card
+        clickable = true
+
+        console.log('You may now pick a card.')
+    }
+    //---------
+    function playCard(whichCard){
+        console.log('playCard just started')
+        clickable = false //stop players from playing another card
+        let effect = whichCard.effect;
+
+        //update players resources //make sure none of them are below 1
+        ///The effect will be used here
+
+        //render the structures
+
+        turnEnd(whichCard.nums)
+    }
+    //--------
+    let card_replaced = false;
+    function turnEnd(nums){
+        console.log('turnEnd just started.')
+        // console.log('nums: ', nums)
+        //replace that card in the deck
+        card_replaced = false;
+        if(player_turn_one == true){
+            for(let i = 0; i < 5; i++){
+                if(card_replaced == false){
+                    // console.log('PlayerOne.cards[i][0] : ', PlayerOne.cards[i][0])
+                    // console.log('typeNum: ', nums.typeNum)
+                    // console.log('PlayerOne.cards[i][1] : ', PlayerOne.cards[i][1])
+                    // console.log('num: ', nums.num)
+                    if(PlayerOne.cards[i][0] == nums.typeNum && PlayerOne.cards[i][1] == nums.Num){
+                        console.log('The card played ', i, " ", PlayerOne.cards[i], ' has been replaced with: ')
+                        PlayerOne.cards[i][0] = randnum(4);
+                        PlayerOne.cards[i][1] = randnum(10);
+                        console.log(PlayerOne.cards[i])
+                        card_replaced = true
+                    }
+                }
+                
+            }
+        }
+        else if(player_turn_two == true){
+            console.log('A card from PlayerTwo is going to be replaced.')
+            for(let i = 0; i < 5; i++){
+                if(card_replaced == false){
+                    if(PlayerTwo.cards[i][0] == nums.typeNum && PlayerTwo.cards[i][1] == nums.num){
+                        console.log('The card played ', i, " ", PlayerTwo.cards[i], ' has been replaced with: ')
+                        PlayerTwo.cards[i][0] = randnum(4);
+                        PlayerTwo.cards[i][1] = randnum(10);
+                        console.log(PlayerTwo.cards[i])
+                        card_replaced = true
+                    }
+                }
+            }
+        }
+        else{
+            console.log('player_count not working')
+        }
+
+        console.log('player one cards after replace: ', PlayerOne.cards)
+
+        //check to see if either player is out
+        if(PlayerOne.constructs.castle == 0){
+            console.log('Player two wins')
+        } 
+        else if(PlayerTwo.constructs.castle == 0){
+            console.log('Player one wins')   
+        }
+        else{
+            turnStart()
+        }
+    }
+
+    
+
+    //---------------------------
+
+    function randnum(max){
+        let num = Math.floor(Math.random() * (max -1));
+        return num;
+    }
+
+
+    //Start the game
+    // turnStart()
+
+
+    return(
+        <>
+            <div id="gamepage-container">
+                <div id="left-player-container" className="player-container">
+                    {PlayerOne.resources}
+                </div>
+                <div id="middle-box">
+                    <div id="field-container">
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+                    <div id="deck">
+                        {player_turn_one && PlayerOne.deck}
+                        {player_turn_two && PlayerTwo.deck}
+                    </div>
+                </div>
+                <div id="right-player-container" className="player-container">
+                    {PlayerTwo.resources}
+                </div>
+            </div>
+
+        </>
+    )
+
+    
+}
+
+
+//============================
+/* Gameflow */
+/*
+    SETUP
+    randomly pick the players starting cards
+    start the turn with player one
+    render the page with the default starting resources
+    and render generated cards for player one
+    
+    GAMEPLAY
+    player picks a card
+    the cards effect is used
+    update the players resources according to the effect
+    render the players resources
+    remove that card from the players deck
+    replace the played card with a random one
+    set the players_turn to the next player
+    render that players cards
+
+
+
+
+*/
+
+
+// =================================================================
+
+/*
+let players = {
         one: {
             name: 'Uno',
             resources: {
@@ -64,188 +251,5 @@ export default function GamePage(){
             }
         }
     }
-    //------------------------------
-    let turn_count = 0;
-    let [player_turn, setPlayerTurn] = useState('one')
-    let clickable = false;
-    function turnStart(){
-        console.log('before replace player one cards: ', players.one.cards)
-        //determine which player is going
-        turn_count += 1;
-        if(turn_count %2 == 0){
-            useCallback(() => {
-                setPlayerTurn('two')
-            }, [player_turn])
-        }
-        else{
-            useCallback(() => {
-                setPlayerTurn('one')
-            }, [player_turn])
-        }
-
-        console.log('\n \n turn_count: ', turn_count, " player_turn: ", player_turn)
-
-        // show correct player cards
-            //the Deck component should automatically do that
-
-        //update player resources
-        if(player_turn == 'one'){
-            players.one.resources.build.currency += players.one.resources.build.helpers
-            players.one.resources.attack.currency += players.one.resources.attack.helpers
-            players.one.resources.magic.currency += players.one.resources.magic.helpers
-
-        }
-        else if(player_turn == 'two'){
-            players.two.resources.build.currency += players.two.resources.build.helpers
-            players.two.resources.attack.currency += players.two.resources.attack.helpers
-            players.two.resources.magic.currency += players.two.resources.magic.helpers
-        }
-        else{
-            console.log('player_turn malfunction')
-        }
-
-        // show correct player resources
-            //the Resources components should automatically do that
-        
-        // let player pick a card
-        clickable = true
-
-        console.log('You may now pick a card.')
-    }
-    //---------
-    function playCard(whichCard){
-        console.log('playCard just started')
-        clickable = false //stop players from playing another card
-        let effect = whichCard.effect;
-
-        //update players resources //make sure none of them are below 1
-        ///The effect will be used here
-
-        //render the structures
-
-        turnEnd(whichCard.nums)
-    }
-    //--------
-    let card_replaced = false;
-    function turnEnd(nums){
-        console.log('turnEnd just started.')
-        // console.log('nums: ', nums)
-        //replace that card in the deck
-        card_replaced = false;
-        if(player_turn == 'one'){
-            for(let i = 0; i < 5; i++){
-                if(card_replaced == false){
-                    // console.log('players.one.cards[i][0] : ', players.one.cards[i][0])
-                    // console.log('typeNum: ', nums.typeNum)
-                    // console.log('players.one.cards[i][1] : ', players.one.cards[i][1])
-                    // console.log('num: ', nums.num)
-                    if(players.one.cards[i][0] == nums.typeNum && players.one.cards[i][1] == nums.Num){
-                        console.log('The card played ', i, " ", players.one.cards[i], ' has been replaced with: ')
-                        players.one.cards[i][0] = randnum(4);
-                        players.one.cards[i][1] = randnum(10);
-                        console.log(players.one.cards[i])
-                        card_replaced = true
-                    }
-                }
-                
-            }
-        }
-        else if(player_turn == 'two'){
-            console.log('A card from players.two is going to be replaced.')
-            for(let i = 0; i < 5; i++){
-                if(card_replaced == false){
-                    if(players.two.cards[i][0] == nums.typeNum && players.two.cards[i][1] == nums.num){
-                        console.log('The card played ', i, " ", players.two.cards[i], ' has been replaced with: ')
-                        players.two.cards[i][0] = randnum(4);
-                        players.two.cards[i][1] = randnum(10);
-                        console.log(players.two.cards[i])
-                        card_replaced = true
-                    }
-                }
-            }
-        }
-        else{
-            console.log('player_count not working')
-        }
-
-        console.log('player one cards after replace: ', players.one.cards)
-
-        //check to see if either player is out
-        if(players.one.constructs.castle == 0){
-            console.log('Player two wins')
-        } 
-        else if(players.two.constructs.castle == 0){
-            console.log('Player one wins')   
-        }
-        else{
-            turnStart()
-        }
-    }
-
-    
-
-    //---------------------------
-
-    function randnum(max){
-        let num = Math.floor(Math.random() * (max -1));
-        return num;
-    }
-
-
-    //Start the game
-    // turnStart()
-
-
-    return(
-        <>
-            <div id="gamepage-container">
-                <div id="left-player-container" className="player-container">
-                    <ResourceStats render={{type: {helper: {name: 'Builders', amount: players.one.resources.build.helpers}, currency: {name: 'Bricks', amount: players.one.resources.build.currency}},  class: "build"}}></ResourceStats>
-                    <ResourceStats render={{type: {helper: {name: 'Soldiers', amount: players.one.resources.attack.helpers}, currency: {name: 'Weapons', amount: players.one.resources.attack.currency}}, class: "attack"}}></ResourceStats>
-                    <ResourceStats render={{type: {helper: {name: 'Magicians', amount: players.one.resources.magic.helpers}, currency: {name: 'Crystals', amount: players.one.resources.magic.currency}}, class: "magic"}}></ResourceStats>
-                </div>
-                <div id="middle-box">
-                    <div id="field-container">
-                        <p>Lorem ipsum dolor sit amet.</p>
-                    </div>
-                    <div id="deck">
-                        <Deck render={{turn: player_turn, cards: {oneCards: players.one.cards, twoCards: players.two.cards}, clickable: clickable, pc: playCard}}></Deck>
-                    </div>
-                </div>
-                <div id="right-player-container" className="player-container">
-                <ResourceStats render={{type: {helper: {name: 'Builders', amount: players.two.resources.build.helpers}, currency: {name: 'Bricks', amount: players.two.resources.build.currency}},  class: "build"}}></ResourceStats>
-                <ResourceStats render={{type: {helper: {name: 'Soldiers', amount: players.two.resources.attack.helpers}, currency: {name: 'Weapons', amount: players.two.resources.attack.currency}}, class: "attack"}}></ResourceStats>
-                <ResourceStats render={{type: {helper: {name: 'Magicians', amount: players.two.resources.magic.helpers}, currency: {name: 'Crystals', amount: players.two.resources.magic.currency}}, class: "magic"}}></ResourceStats>
-                </div>
-            </div>
-
-        </>
-    )
-
-    
-}
-
-
-//============================
-/* Gameflow */
-/*
-    SETUP
-    randomly pick the players starting cards
-    start the turn with player one
-    render the page with the default starting resources
-    and render generated cards for player one
-    
-    GAMEPLAY
-    player picks a card
-    the cards effect is used
-    update the players resources according to the effect
-    render the players resources
-    remove that card from the players deck
-    replace the played card with a random one
-    set the players_turn to the next player
-    render that players cards    
-
-
-
 
 */
