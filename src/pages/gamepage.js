@@ -199,11 +199,11 @@ export default function GamePage(){
     return(
         <>
             <div id="gamepage-container">
-                <PlayerOne controls={{turn: [player_turn_one, player_turn_two], you: players.one}}></PlayerOne>
+                <PlayerOne controls={{turn: [player_turn_one, player_turn_two], you: players.one, clickable: clickable}}></PlayerOne>
                 <div id="field-container">
 
                 </div>
-                <PlayerTwo controls={{turn: [player_turn_one, player_turn_two], you: players.two}}></PlayerTwo>
+                <PlayerTwo controls={{turn: [player_turn_one, player_turn_two], you: players.two, clickable: clickable}}></PlayerTwo>
             </div>
 
         </>

@@ -2,11 +2,11 @@ import ResourceStats from '../stats/resources';
 import Deck from '../cards/deck'
 import '../../styles/ComponentStyles/playerStyles.css'
 
-
-
 export default function PlayerTwo({controls}){
     let two = controls.you;
     let twoDeck = controls.turn[1];
+    let clickable = controls.clickable;
+
 
 
     return(
@@ -17,7 +17,7 @@ export default function PlayerTwo({controls}){
                     <ResourceStats render={{type: {helper: {name: 'Soldiers', amount: two.resources.attack.helpers}, currency: {name: 'Weapons', amount: two.resources.attack.currency}}, class: "attack"}}></ResourceStats>
                     <ResourceStats render={{type: {helper: {name: 'Magicians', amount: two.resources.magic.helpers}, currency: {name: 'Crystals', amount: two.resources.magic.currency}}, class: "magic"}}></ResourceStats>
                 </div>
-                <Deck render={{cards: {twoCards: two.cards}, twoDeck: twoDeck}}></Deck>
+                <Deck render={{cards: {twoCards: two.cards}, twoDeck: twoDeck, clickable: clickable}}></Deck>
             </div>
         </>
     )
