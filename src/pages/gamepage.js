@@ -1,3 +1,16 @@
+//Same problem with this revamped (not as good in my opinion) code.
+//Somehow I'm infinetly rendering
+//Go back to the first time I got this error. I think that code logic was better. The styling definetly was.
+
+
+
+
+
+
+
+
+
+
 import '../styles/pageStyles/gamepageStyles.css'
 import {useCallback, useState} from 'react';
 import PlayerOne from '../components/players/playerOne';
