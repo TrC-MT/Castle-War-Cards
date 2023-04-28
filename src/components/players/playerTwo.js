@@ -1,17 +1,24 @@
 import ResourceStats from '../stats/resources';
 import Deck from '../cards/deck'
+import '../../styles/ComponentStyles/playerStyles.css'
 
 
-export default function PlayerOne({controls}){
-    let two = controls.you
+
+export default function PlayerTwo({controls}){
+    let two = controls.you;
+    let twoDeck = controls.turn[1];
 
 
     return(
         <>
-            <ResourceStats render={{type: {helper: {name: 'Builders', amount: two.resources.build.helpers}, currency: {name: 'Bricks', amount: two.resources.build.currency}},  class: "build"}}></ResourceStats>
-            <ResourceStats render={{type: {helper: {name: 'Soldiers', amount: two.resources.attack.helpers}, currency: {name: 'Weapons', amount: two.resources.attack.currency}}, class: "attack"}}></ResourceStats>
-            <ResourceStats render={{type: {helper: {name: 'Magicians', amount: two.resources.magic.helpers}, currency: {name: 'Crystals', amount: two.resources.magic.currency}}, class: "magic"}}></ResourceStats>
-            <Deck render={{cards: {twoCards: two.cards}}}></Deck>
+            <div id='player-one-container' className='player-container'>
+                <div className="player-resources-container">
+                    <ResourceStats render={{type: {helper: {name: 'Builders', amount: two.resources.build.helpers}, currency: {name: 'Bricks', amount: two.resources.build.currency}},  class: "build"}}></ResourceStats>
+                    <ResourceStats render={{type: {helper: {name: 'Soldiers', amount: two.resources.attack.helpers}, currency: {name: 'Weapons', amount: two.resources.attack.currency}}, class: "attack"}}></ResourceStats>
+                    <ResourceStats render={{type: {helper: {name: 'Magicians', amount: two.resources.magic.helpers}, currency: {name: 'Crystals', amount: two.resources.magic.currency}}, class: "magic"}}></ResourceStats>
+                </div>
+                <Deck render={{cards: {twoCards: two.cards}, twoDeck: twoDeck}}></Deck>
+            </div>
         </>
     )
 }

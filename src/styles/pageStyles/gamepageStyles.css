@@ -8,14 +8,8 @@
     border: 1px solid black;
 }
 
-#middle-box{
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-}
-
 #field-container{
-    height: 60%;
+    width: 40%;
 }
 
 #deck{
