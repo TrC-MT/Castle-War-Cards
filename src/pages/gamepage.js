@@ -83,7 +83,7 @@ export default function GamePage(){
                 setPlayerTurnTwo(false)
         }
 
-        console.log('\n \n turn_count: ', turn_count, " player_turn: ")
+        console.log('\n \n turn_count: ', turn_count, " player_turn: ", [player_turn_one, player_turn_two])
 
         // show correct player cards
             //the Deck component should automatically do that
@@ -193,7 +193,7 @@ export default function GamePage(){
 
 
     //Start the game
-    // turnStart()
+    turnStart()
 
 
     return(
