@@ -1,20 +1,8 @@
-//Same problem with this revamped (not as good in my opinion) code.
-//Somehow I'm infinetly rendering
-//Go back to the first time I got this error. I think that code logic was better. The styling definetly was.
-
-
-
-
-
-
-
-
-
-
 import '../styles/pageStyles/gamepageStyles.css'
-import {useCallback, useState} from 'react';
-import PlayerOne from '../components/players/playerOne';
-import PlayerTwo from '../components/players/playerTwo'
+import ResourceStats from "../components/stats/resources";
+import Deck from '../components/cards/deck';
+import {useState} from 'react';
+
 
 export default function GamePage(){
 
@@ -76,39 +64,34 @@ export default function GamePage(){
             }
         }
     }
-
-    
     //------------------------------
     let turn_count = 0;
-    let [player_turn_one, setPlayerTurnOne] = useState(true)
-    let [player_turn_two, setPlayerTurnTwo] = useState(false)
+    let player_turn = 'one';
     let clickable = false;
     function turnStart(){
-        console.log('before replace player one cards: ', )
+        console.log('before replace player one cards: ', players.one.cards)
         //determine which player is going
         turn_count += 1;
         if(turn_count %2 == 0){
-                setPlayerTurnOne(false)
-                setPlayerTurnTwo(true)
+            player_turn = 'two';
         }
         else{
-                setPlayerTurnOne(true)
-                setPlayerTurnTwo(false)
+            player_turn = 'one';
         }
 
-        console.log('\n \n turn_count: ', turn_count, " player_turn: ", [player_turn_one, player_turn_two])
+        console.log('\n \n turn_count: ', turn_count, " player_turn: ", player_turn)
 
         // show correct player cards
             //the Deck component should automatically do that
 
         //update player resources
-        if(player_turn_one == true){
+        if(player_turn == 'one'){
             players.one.resources.build.currency += players.one.resources.build.helpers
             players.one.resources.attack.currency += players.one.resources.attack.helpers
             players.one.resources.magic.currency += players.one.resources.magic.helpers
 
         }
-        else if(player_turn_two == true){
+        else if(player_turn == 'two'){
             players.two.resources.build.currency += players.two.resources.build.helpers
             players.two.resources.attack.currency += players.two.resources.attack.helpers
             players.two.resources.magic.currency += players.two.resources.magic.helpers
@@ -116,9 +99,6 @@ export default function GamePage(){
         else{
             console.log('player_turn malfunction')
         }
-
-        // show correct player resources
-            //the Resources components should automatically do that
         
         // let player pick a card
         clickable = true
@@ -145,7 +125,7 @@ export default function GamePage(){
         // console.log('nums: ', nums)
         //replace that card in the deck
         card_replaced = false;
-        if(player_turn_one == true){
+        if(player_turn == 'one'){
             for(let i = 0; i < 5; i++){
                 if(card_replaced == false){
                     // console.log('players.one.cards[i][0] : ', players.one.cards[i][0])
@@ -163,7 +143,7 @@ export default function GamePage(){
                 
             }
         }
-        else if(player_turn_two == true){
+        else if(player_turn == 'two'){
             console.log('A card from players.two is going to be replaced.')
             for(let i = 0; i < 5; i++){
                 if(card_replaced == false){
@@ -212,11 +192,24 @@ export default function GamePage(){
     return(
         <>
             <div id="gamepage-container">
-                <PlayerOne controls={{turn: [player_turn_one, player_turn_two], you: players.one, clickable: clickable}}></PlayerOne>
-                <div id="field-container">
-
+                <div id="left-player-container" className="player-container">
+                    <ResourceStats render={{type: {helper: {name: 'Builders', amount: players.one.resources.build.helpers}, currency: {name: 'Bricks', amount: players.one.resources.build.currency}},  class: "build"}}></ResourceStats>
+                    <ResourceStats render={{type: {helper: {name: 'Soldiers', amount: players.one.resources.attack.helpers}, currency: {name: 'Weapons', amount: players.one.resources.attack.currency}}, class: "attack"}}></ResourceStats>
+                    <ResourceStats render={{type: {helper: {name: 'Magicians', amount: players.one.resources.magic.helpers}, currency: {name: 'Crystals', amount: players.one.resources.magic.currency}}, class: "magic"}}></ResourceStats>
                 </div>
-                <PlayerTwo controls={{turn: [player_turn_one, player_turn_two], you: players.two, clickable: clickable}}></PlayerTwo>
+                <div id="middle-box">
+                    <div id="field-container">
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+                    <div id="deck">
+                        <Deck render={{turn: player_turn, cards: {oneCards: players.one.cards, twoCards: players.two.cards}, clickable: clickable, pc: playCard}}></Deck>
+                    </div>
+                </div>
+                <div id="right-player-container" className="player-container">
+                <ResourceStats render={{type: {helper: {name: 'Builders', amount: players.two.resources.build.helpers}, currency: {name: 'Bricks', amount: players.two.resources.build.currency}},  class: "build"}}></ResourceStats>
+                <ResourceStats render={{type: {helper: {name: 'Soldiers', amount: players.two.resources.attack.helpers}, currency: {name: 'Weapons', amount: players.two.resources.attack.currency}}, class: "attack"}}></ResourceStats>
+                <ResourceStats render={{type: {helper: {name: 'Magicians', amount: players.two.resources.magic.helpers}, currency: {name: 'Crystals', amount: players.two.resources.magic.currency}}, class: "magic"}}></ResourceStats>
+                </div>
             </div>
 
         </>
@@ -224,93 +217,3 @@ export default function GamePage(){
 
     
 }
-
-
-//============================
-/* Gameflow */
-/*
-    SETUP
-    randomly pick the players starting cards
-    start the turn with player one
-    render the page with the default starting resources
-    and render generated cards for player one
-    
-    GAMEPLAY
-    player picks a card
-    the cards effect is used
-    update the players resources according to the effect
-    render the players resources
-    remove that card from the players deck
-    replace the played card with a random one
-    set the players_turn to the next player
-    render that players cards
-
-
-
-
-*/
-
-
-// =================================================================
-
-/*
-let players = {
-        one: {
-            name: 'Uno',
-            resources: {
-                build: {
-                    helpers: 2,
-                    currency: 4
-                },
-                attack: {
-                    helpers: 2,
-                    currency: 4
-                },
-                magic: {
-                    helpers: 2,
-                    currency: 4
-                },
-            },
-            cards: [
-                [1, 2], //card 1: {type: 0-3, num: 0-9}
-                [2, 1],
-                [1, 9],
-                [1, 5],
-                [2, 1]
-            ],
-            constructs: {
-                castle: 40,
-                fence: 20,
-            }
-        },
-        two: {
-            name: 'Dos',
-            resources: {
-                build: {
-                    helpers: 2,
-                    currency: 6
-                },
-                attack: {
-                    helpers: 3,
-                    currency: 3
-                },
-                magic: {
-                    helpers: 1,
-                    currency: 2
-                },
-            },
-            cards: [
-                [0, 7],
-                [2, 1],
-                [0, 3],
-                [1, 5],
-                [2, 9]
-            ],
-            constructs: {
-                castle: 40,
-                fence: 20,
-            }
-        }
-    }
-
-*/
