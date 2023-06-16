@@ -21,11 +21,11 @@ export default function Card({render}){
         currency = 'crystals';
     }
     else{
-        console.log('typeNum is out of bounds')
-    }
+        console.log('typeNum is out of bounds');
+    };
 
-    let card = cards[typeNum][num]
-    let whichCard = {effect: card.effect, nums: render.nums}
+    let card = cards[typeNum][num];
+    let whichCard = {effect: card.effect, nums: render.nums};
 
     return(
         <>
@@ -36,15 +36,15 @@ export default function Card({render}){
                 <p className="card-effect">{card.description}</p>
             </div>
         </>
-    )
+    );
 
     function tryPlayCard(whichCard){
         if(clickable == true){
-            console.log('Playing a card.', " whichCard: ", whichCard)
+            console.log('Playing a card.', " whichCard: ", whichCard);
             playCard(whichCard)
         }
         else{
-            console.log('Not clickable yet.')
-        }
-    }
-}
+            console.log('Not clickable yet.');
+        };
+    };
+};

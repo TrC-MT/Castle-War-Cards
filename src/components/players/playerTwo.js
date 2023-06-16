@@ -20,7 +20,7 @@ export default function PlayerTwo({controls}){
                 <Deck render={{cards: {twoCards: two.cards}, twoDeck: twoDeck, clickable: clickable}}></Deck>
             </div>
         </>
-    )
+    );
 }
 
 

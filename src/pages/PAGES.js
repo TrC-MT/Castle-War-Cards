@@ -1,5 +1,5 @@
-import gamepage from './gamepage'
+import gamepage from './gamepage';
 
 export default {
     game: gamepage
-}
+};

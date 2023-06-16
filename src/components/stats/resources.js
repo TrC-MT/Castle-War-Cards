@@ -13,5 +13,5 @@ export default function ResourceStats({render}){
                 <h6 className="resource-stat resource-stat-currency-amount">{type.currency.amount}</h6>
             </div>
         </>
-    )
+    );
 }

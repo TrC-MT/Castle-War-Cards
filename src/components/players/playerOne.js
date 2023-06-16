@@ -20,7 +20,7 @@ export default function PlayerOne({controls}){
                 <Deck render={{cards: {oneCards: one.cards}, oneDeck: oneDeck, clickable: clickable}}></Deck>
             </div>
         </>
-    )
+    );
 }
 
 
