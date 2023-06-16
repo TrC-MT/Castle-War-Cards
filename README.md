@@ -1,3 +1,9 @@
+This project is inspired from Castle War Cards (https://www.twoplayergames.org/game/castle-war-cards)
+I'm still working on a different name.
+
+
+==================================================
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

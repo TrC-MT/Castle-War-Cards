@@ -185,5 +185,20 @@ export default [
             description: "magicians +1",
             effect: ""
         },
+    ],
+    [ //Food
+        {
+            name: "Farmer",
+            cost: "8",
+            description: "harvest +1",
+            effect: ""
+        },
+    ],
+    [ //Random
+        {
+            name: "Random",
+            cost: "//between 1 to 4 of any resource",
+            description: "any resource either player + or - 3 to 5"
+        },
     ]
-]
+];
