@@ -66,23 +66,28 @@ export default function GamePage(){
     };
     //------------------------------
     let turn_count = 0;
-    let player_turn = 'one';
+    // let player_turn = 'one'; // DECK NOT RERENDER
+    let [player_turn, setPlayer_turn] = useState('one'); // INFINITE RENDERS
     let clickable = false;
     function turnStart(){
-        console.log('before replace player one cards: ', players.one.cards);
+        console.log(`before replace player one cards: `, players.one.cards);
+        console.log(`before replace player two cards: `, players.two.cards);
         //determine which player is going
         turn_count += 1;
         if(turn_count %2 == 0){
-            player_turn = 'two';
+            // player_turn = 'two'; // DECK NOT RERENDER
+            setPlayer_turn('two'); // INFINITE RENDERS
         }
         else{
-            player_turn = 'one';
+            // player_turn = 'one'; // DECK NOT RERENDER
+            setPlayer_turn('one'); // INFINITE RENDERS
         };
 
         console.log('\n \n turn_count: ', turn_count, " player_turn: ", player_turn);
 
         // show correct player cards
             //the Deck component should automatically do that
+                // *new* Probably because of the player_turn. What did I do next? Check GitHub.
 
         //update player resources
         if(player_turn == 'one'){
@@ -105,7 +110,7 @@ export default function GamePage(){
         clickable = true;
 
         console.log('You may now pick a card.');
-    }
+    };
     //---------
     function playCard(whichCard){
         console.log('playCard just started');
@@ -123,7 +128,7 @@ export default function GamePage(){
     let card_replaced = false;
     function turnEnd(nums){
         console.log('turnEnd just started.');
-        // console.log('nums: ', nums)
+        console.log('nums: ', nums);
         //replace that card in the deck
         card_replaced = false;
         if(player_turn == 'one'){
